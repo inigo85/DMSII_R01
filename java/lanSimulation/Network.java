@@ -184,7 +184,7 @@ which should be treated by all nodes.
 		// just ignore
 	    };
 	    currentNode = currentNode.nextNode_;
-        } while (! packet.destination_.equals(currentNode.name_));
+        } while (! packet.getDestination_().equals(currentNode.name_));
 
 	try {
 	    report.write(">>> Broadcast travelled whole token ring.\n\n");
@@ -236,7 +236,7 @@ Therefore #receiver sends a packet across the token ring network, until either
 	    // just ignore
 	};
         currentNode = startNode.nextNode_;
-        while ((! packet.destination_.equals(currentNode.name_))
+        while ((! packet.getDestination_().equals(currentNode.name_))
 	    & (! packet.getOrigin_().equals(currentNode.name_))) {
 	    try {
 		report.write("\tNode '");
@@ -249,7 +249,7 @@ Therefore #receiver sends a packet across the token ring network, until either
 	currentNode = currentNode.nextNode_;
         };
 
-	if (packet.destination_.equals(currentNode.name_)) {
+	if (packet.getDestination_().equals(currentNode.name_)) {
 	    result = printDocument(currentNode, packet, report);
 	} else {
 	    try {
