@@ -26,7 +26,7 @@ public class Packet {
     /**
     Holds the actual message to be send over the network.
     */
-    public String message_;
+    private String message_;
     /**
     Holds the name of the Node which initiated the request.
     */
@@ -40,7 +40,7 @@ public class Packet {
 Construct a <em>Packet</em> with given #message and #destination.
  */
     public Packet(String message, String destination) {
-	message_ = message;
+	setMessage_(message);
         origin_ = "";
 	destination_ = destination;
     }
@@ -49,9 +49,17 @@ Construct a <em>Packet</em> with given #message and #destination.
 Construct a <em>Packet</em> with given #message, #origin and #receiver.
  */
     public Packet(String message, String origin, String destination) {
-	message_ = message;
+	setMessage_(message);
 	origin_ = origin;
         destination_ = destination;
     }
+
+public String getMessage_() {
+	return message_;
+}
+
+public void setMessage_(String message_) {
+	this.message_ = message_;
+}
     
 }

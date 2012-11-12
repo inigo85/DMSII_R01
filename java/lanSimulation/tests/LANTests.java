@@ -38,7 +38,7 @@ public class LANTests extends TestCase {
         
     	packet = new Packet("c", "a");
         assertEquals("message_",
-            packet.message_, "c");
+            packet.getMessage_(), "c");
         assertEquals("destination_",
             packet.destination_, "a");
         assertEquals("origin_",
