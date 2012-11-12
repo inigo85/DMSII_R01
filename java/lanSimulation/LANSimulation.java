@@ -106,7 +106,7 @@ public class LANSimulation {
         };
 
         System.out.print("BROADCAST REQUEST: ");
-        System.out.print(network.firstNode_.requestBroadcast(network, report));
+        System.out.print(network.requestBroadcast(report));
         System.out.println(" (expects true);");
 
 	System.out.println(); System.out.println(); System.out.println();
