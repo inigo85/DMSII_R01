@@ -335,35 +335,11 @@ Write a printable representation of #receiver on the given #buf.
         assert isInitialized();
         Node currentNode = firstNode_;
         do {
-            print(buf, currentNode);
+            currentNode.print(buf);
             currentNode = currentNode.getNextNode_();
         } while (currentNode != firstNode_);
         buf.append(" ... ");
     }
-
-private void print(StringBuffer buf, Node currentNode) {
-	switch (currentNode.getType_()) {
-	    case Node.NODE:
-	        buf.append("Node ");
-	        buf.append(currentNode.getName_());
-	        buf.append(" [Node]");
-	        break;
-	    case Node.WORKSTATION:
-	        buf.append("Workstation ");
-	        buf.append(currentNode.getName_());
-	        buf.append(" [Workstation]");
-	        break;
-	    case Node.PRINTER:
-	        buf.append("Printer ");
-	        buf.append(currentNode.getName_());
-	        buf.append(" [Printer]");
-	        break;
-	    default:
-	        buf.append("(Unexpected)");;
-	        break;
-	};
-	buf.append(" -> ");
-}
 
 /**
 Write a HTML representation of #receiver on the given #buf.
