@@ -38,7 +38,7 @@ public class Network {
     Holds a pointer to some "first" node in the token ring.
     Used to ensure that various printing operations return expected behaviour.
     */
-    private Node firstNode_;
+    public Node firstNode_;
     /**
     Maps the names of workstations on the actual workstations.
     Used to initiate the requests for the network.
@@ -152,48 +152,6 @@ A consistent token ring network
 	//all verifications succeedeed
         return true;}
 
-/**
-The #receiver is requested to broadcast a message to all nodes.
-Therefore #receiver sends a special broadcast packet across the token ring network,
-which should be treated by all nodes.
-<p><strong>Precondition:</strong> consistentNetwork();</p>
-@param report Stream that will hold a report about what happened when handling the request.
-@return Anwer #true when the broadcast operation was succesful and #false otherwise
-*/
-    public boolean requestBroadcast(Writer report) {
-        assert consistentNetwork();
-
-	try {
-	    report.write("Broadcast Request\n");
-	} catch (IOException exc) {
-	    // just ignore
-	};
-
-        Node currentNode = firstNode_;
-        Packet packet = new Packet("BROADCAST", firstNode_.getName_(), firstNode_.getName_());
-        do {
-	    try {
-		report.write("\tNode '");
-		report.write(currentNode.getName_());
-		report.write("' accepts broadcase packet.\n");
-		report.write("\tNode '");
-		report.write(currentNode.getName_());
-		report.write("' passes packet on.\n");
-		report.flush();
-	    } catch (IOException exc) {
-		// just ignore
-	    };
-	    currentNode = currentNode.getNextNode_();
-        } while (! packet.getDestination_().equals(currentNode.getName_()));
-
-	try {
-	    report.write(">>> Broadcast travelled whole token ring.\n\n");
-	} catch (IOException exc) {
-	    // just ignore
-	};
-	return true;
-    }    
-        
 /**
 The #receiver is requested by #workstation to print #document on #printer.
 Therefore #receiver sends a packet across the token ring network, until either
