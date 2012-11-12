@@ -30,7 +30,7 @@ public class Packet {
     /**
     Holds the name of the Node which initiated the request.
     */
-    public String origin_;
+    private String origin_;
     /**
     Holds the name of the Node which should receive the information.
     */
@@ -41,7 +41,7 @@ Construct a <em>Packet</em> with given #message and #destination.
  */
     public Packet(String message, String destination) {
 	setMessage_(message);
-        origin_ = "";
+        setOrigin_("");
 	destination_ = destination;
     }
     
@@ -50,7 +50,7 @@ Construct a <em>Packet</em> with given #message, #origin and #receiver.
  */
     public Packet(String message, String origin, String destination) {
 	setMessage_(message);
-	origin_ = origin;
+	setOrigin_(origin);
         destination_ = destination;
     }
 
@@ -60,6 +60,14 @@ public String getMessage_() {
 
 public void setMessage_(String message_) {
 	this.message_ = message_;
+}
+
+public String getOrigin_() {
+	return origin_;
+}
+
+public void setOrigin_(String origin_) {
+	this.origin_ = origin_;
 }
     
 }
