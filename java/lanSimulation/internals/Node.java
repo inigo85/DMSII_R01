@@ -190,5 +190,29 @@ public void printHTML(StringBuffer buf) {
 	buf.append(" </LI>");
 }
 
+public void printXML(StringBuffer buf) {
+	buf.append("\n\t");
+	switch (getType_()) {
+	case Node.NODE:
+	    buf.append("<node>");
+	    buf.append(getName_());
+	    buf.append("</node>");
+	    break;
+	case Node.WORKSTATION:
+	    buf.append("<workstation>");
+	    buf.append(getName_());
+	    buf.append("</workstation>");
+	    break;
+	case Node.PRINTER:
+	    buf.append("<printer>");
+	    buf.append(getName_());
+	    buf.append("</printer>");
+	    break;
+	default:
+	    buf.append("<unknown></unknown>");;
+	    break;
+	};
+}
+
             
 }
