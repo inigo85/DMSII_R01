@@ -50,7 +50,7 @@ public class Node {
     Holds the next Node in the token ring architecture.
     @see lanSimulation.internals.Node
     */
-    public Node nextNode_;
+    private Node nextNode_;
     
 /**
 Construct a <em>Node</em> with given #type and #name.
@@ -60,7 +60,7 @@ Construct a <em>Node</em> with given #type and #name.
         assert (type >= NODE) & (type <= PRINTER);
         setType_(type);
         setName_(name);
-        nextNode_ = null;
+        setNextNode_(null);
     }
     
 /**
@@ -71,7 +71,7 @@ Construct a <em>Node</em> with given #type and #name, and which is linked to #ne
         assert (type >= NODE) & (type <= PRINTER);
         setType_(type);
         setName_(name);
-        nextNode_ = nextNode;
+        setNextNode_(nextNode);
     }
 
 /**
@@ -100,6 +100,20 @@ public String getName_() {
  */
 public void setName_(String name_) {
 	this.name_ = name_;
+}
+
+/**
+ * @return the nextNode_
+ */
+public Node getNextNode_() {
+	return nextNode_;
+}
+
+/**
+ * @param nextNode_ the nextNode_ to set
+ */
+public void setNextNode_(Node nextNode_) {
+	this.nextNode_ = nextNode_;
 }
             
 }

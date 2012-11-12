@@ -145,10 +145,10 @@ public class LANTests extends TestCase {
         assertEquals("name_",
             node.getName_(), "n");
         assertEquals("nextNode_",
-            node.nextNode_, null);
-        node.nextNode_ = node;
+            node.getNextNode_(), null);
+        node.setNextNode_(node);
         assertEquals("nextNode_ (after setting)",
-            node.nextNode_, node);
+            node.getNextNode_(), node);
     }
 
     public void testDefaultNetworkToString() {
