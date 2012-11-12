@@ -41,7 +41,7 @@ public class Node {
     /**
     Holds the type of the Node.
     */
-    public byte type_;
+    private byte type_;
     /**
     Holds the name of the Node.
     */
@@ -58,7 +58,7 @@ Construct a <em>Node</em> with given #type and #name.
  */
     public Node(byte type, String name) {
         assert (type >= NODE) & (type <= PRINTER);
-        type_ = type;
+        setType_(type);
         name_ = name;
         nextNode_ = null;
     }
@@ -69,9 +69,23 @@ Construct a <em>Node</em> with given #type and #name, and which is linked to #ne
  */
     public Node(byte type, String name, Node nextNode) {
         assert (type >= NODE) & (type <= PRINTER);
-        type_ = type;
+        setType_(type);
         name_ = name;
         nextNode_ = nextNode;
     }
+
+/**
+ * @return the type_
+ */
+public byte getType_() {
+	return type_;
+}
+
+/**
+ * @param type_ the type_ to set
+ */
+public void setType_(byte type_) {
+	this.type_ = type_;
+}
             
 }

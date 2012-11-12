@@ -109,7 +109,7 @@ Answer whether #receiver contains a workstation with the given name.
 	if (n == null) {
 	    return false;
 	} else {
-	    return n.type_ == Node.WORKSTATION;
+	    return n.getType_() == Node.WORKSTATION;
 	}
     };
         
@@ -135,15 +135,15 @@ A consistent token ring network
 	iter = workstations_.elements();
 	while (iter.hasMoreElements()) {
 	    currentNode = (Node) iter.nextElement();
-	    if (currentNode.type_ != Node.WORKSTATION) {return false;};
+	    if (currentNode.getType_() != Node.WORKSTATION) {return false;};
 	};
 	//enumerate the token ring, verifying whether all workstations are registered
 	//also count the number of printers and see whether the ring is circular
 	currentNode = firstNode_;
 	while (! encountered.containsKey(currentNode.name_)) {
 	    encountered.put(currentNode.name_, currentNode);
-	    if (currentNode.type_ == Node.WORKSTATION) {workstationsFound++;};
-	    if (currentNode.type_ == Node.PRINTER) {printersFound++;};
+	    if (currentNode.getType_() == Node.WORKSTATION) {workstationsFound++;};
+	    if (currentNode.getType_() == Node.PRINTER) {printersFound++;};
 	    currentNode = currentNode.nextNode_;
 	};
 	if (currentNode != firstNode_) {return false;};//not circular
@@ -269,7 +269,7 @@ Therefore #receiver sends a packet across the token ring network, until either
 	String title = "Untitled";
 	int startPos = 0, endPos = 0;
 	
-	if (printer.type_ == Node.PRINTER) {
+	if (printer.getType_() == Node.PRINTER) {
 	    try {
 		if (document.getMessage_().startsWith("!PS")) {
 		    startPos = document.getMessage_().indexOf("author:");
@@ -335,7 +335,7 @@ Write a printable representation of #receiver on the given #buf.
         assert isInitialized();
         Node currentNode = firstNode_;
         do {
-            switch (currentNode.type_) {
+            switch (currentNode.getType_()) {
                 case Node.NODE:
                     buf.append("Node ");
                     buf.append(currentNode.name_);
@@ -373,7 +373,7 @@ Write a HTML representation of #receiver on the given #buf.
 	buf.append("\n\n<UL>");
 	do {
 	    buf.append("\n\t<LI> ");
-	    switch (currentNode.type_) {
+	    switch (currentNode.getType_()) {
 		case Node.NODE:
 		    buf.append("Node ");
 		    buf.append(currentNode.name_);
@@ -410,7 +410,7 @@ Write an XML representation of #receiver on the given #buf.
 	buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<network>");
 	do {
 	    buf.append("\n\t");
-	    switch (currentNode.type_) {
+	    switch (currentNode.getType_()) {
 		case Node.NODE:
 		    buf.append("<node>");
 		    buf.append(currentNode.name_);
