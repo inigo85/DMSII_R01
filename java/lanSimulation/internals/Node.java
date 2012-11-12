@@ -19,11 +19,6 @@
  */
  package lanSimulation.internals;
 
-import java.io.IOException;
-import java.io.Writer;
-
-import lanSimulation.Network;
-
 /**
 A <em>Node</em> represents a single Node in a Local Area Network (LAN).
 Several types of Nodes exist.
@@ -120,48 +115,5 @@ public Node getNextNode_() {
 public void setNextNode_(Node nextNode_) {
 	this.nextNode_ = nextNode_;
 }
-
-/**
-The #receiver is requested to broadcast a message to all nodes.
-Therefore #receiver sends a special broadcast packet across the token ring network,
-which should be treated by all nodes.
-<p><strong>Precondition:</strong> consistentNetwork();</p>
-@param network TODO
- * @param report Stream that will hold a report about what happened when handling the request.
- * @return Anwer #true when the broadcast operation was succesful and #false otherwise
-*/
-    public boolean requestBroadcast(Network network, Writer report) {
-        assert network.consistentNetwork();
-
-	try {
-	    report.write("Broadcast Request\n");
-	} catch (IOException exc) {
-	    // just ignore
-	};
-
-        Node currentNode = this;
-        Packet packet = new Packet("BROADCAST", getName_(), getName_());
-        do {
-	    try {
-		report.write("\tNode '");
-		report.write(currentNode.getName_());
-		report.write("' accepts broadcase packet.\n");
-		report.write("\tNode '");
-		report.write(currentNode.getName_());
-		report.write("' passes packet on.\n");
-		report.flush();
-	    } catch (IOException exc) {
-		// just ignore
-	    };
-	    currentNode = currentNode.getNextNode_();
-        } while (! packet.getDestination_().equals(currentNode.getName_()));
-
-	try {
-	    report.write(">>> Broadcast travelled whole token ring.\n\n");
-	} catch (IOException exc) {
-	    // just ignore
-	};
-	return true;
-    }
             
 }

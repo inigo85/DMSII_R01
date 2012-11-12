@@ -184,7 +184,7 @@ public class LANTests extends TestCase {
 	StringWriter report = new StringWriter(500);
 
         assertTrue("Broadcast ",
-		   network.firstNode_.requestBroadcast(network, report));
+		   network.requestBroadcast(report));
     }
 
     /**
@@ -231,7 +231,7 @@ the tests should work as expected.
 	    report.write("\n\n---------------------------------SCENARIO: Print Failure Postscript-----------------\n");
 	    network.requestWorkstationPrintsDocument("Filip", "!PS Hello World in postscript", "Hans", report);
 	    report.write("\n\n---------------------------------SCENARIO: Broadcast Success -----------------\n");
-	    network.firstNode_.requestBroadcast(network, report);
+	    network.requestBroadcast(report);
 	    generateOutput.write(report.toString());
 	} catch (IOException exc) {
 	} finally {
