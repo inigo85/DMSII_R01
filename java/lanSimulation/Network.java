@@ -172,17 +172,7 @@ which should be treated by all nodes.
         Node currentNode = firstNode_;
         Packet packet = new Packet("BROADCAST", firstNode_.getName_(), firstNode_.getName_());
         do {
-	    try {
-		report.write("\tNode '");
-		report.write(currentNode.getName_());
-		report.write("' accepts broadcase packet.\n");
-		report.write("\tNode '");
-		report.write(currentNode.getName_());
-		report.write("' passes packet on.\n");
-		report.flush();
-	    } catch (IOException exc) {
-		// just ignore
-	    };
+	    reportBroadcast(report, currentNode);
 	    currentNode = currentNode.getNextNode_();
         } while (! packet.getDestination_().equals(currentNode.getName_()));
 
@@ -192,7 +182,21 @@ which should be treated by all nodes.
 	    // just ignore
 	};
 	return true;
-    }    
+    }
+
+private void reportBroadcast(Writer report, Node currentNode) {
+	try {
+	report.write("\tNode '");
+	report.write(currentNode.getName_());
+	report.write("' accepts broadcase packet.\n");
+	report.write("\tNode '");
+	report.write(currentNode.getName_());
+	report.write("' passes packet on.\n");
+	report.flush();
+	} catch (IOException exc) {
+	// just ignore
+	};
+}    
         
 /**
 The #receiver is requested by #workstation to print #document on #printer.
