@@ -330,36 +330,11 @@ Write a HTML representation of #receiver on the given #buf.
 	Node currentNode = firstNode_;
 	buf.append("\n\n<UL>");
 	do {
-	    printHTML(buf, currentNode);
+	    currentNode.printHTML(buf);
 	    currentNode = currentNode.getNextNode_();
 	} while (currentNode != firstNode_);
 	buf.append("\n\t<LI>...</LI>\n</UL>\n\n</BODY>\n</HTML>\n");
     }
-
-private void printHTML(StringBuffer buf, Node currentNode) {
-	buf.append("\n\t<LI> ");
-	switch (currentNode.getType_()) {
-	case Node.NODE:
-	    buf.append("Node ");
-	    buf.append(currentNode.getName_());
-	    buf.append(" [Node]");
-	    break;
-	case Node.WORKSTATION:
-	    buf.append("Workstation ");
-	    buf.append(currentNode.getName_());
-	    buf.append(" [Workstation]");
-	    break;
-	case Node.PRINTER:
-	    buf.append("Printer ");
-	    buf.append(currentNode.getName_());
-	    buf.append(" [Printer]");
-	    break;
-	default:
-	    buf.append("(Unexpected)");;
-	    break;
-	};
-	buf.append(" </LI>");
-}
 
 /**
 Write an XML representation of #receiver on the given #buf.

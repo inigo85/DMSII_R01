@@ -163,5 +163,30 @@ which should be treated by all nodes.
 	};
 	return true;
     }
+
+public void printHTML(StringBuffer buf) {
+	buf.append("\n\t<LI> ");
+	switch (getType_()) {
+	case Node.NODE:
+	    buf.append("Node ");
+	    buf.append(getName_());
+	    buf.append(" [Node]");
+	    break;
+	case Node.WORKSTATION:
+	    buf.append("Workstation ");
+	    buf.append(getName_());
+	    buf.append(" [Workstation]");
+	    break;
+	case Node.PRINTER:
+	    buf.append("Printer ");
+	    buf.append(getName_());
+	    buf.append(" [Printer]");
+	    break;
+	default:
+	    buf.append("(Unexpected)");;
+	    break;
+	};
+	buf.append(" </LI>");
+}
             
 }
