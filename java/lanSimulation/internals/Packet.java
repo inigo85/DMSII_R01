@@ -19,6 +19,9 @@
  */
 package lanSimulation.internals;
 
+import java.io.IOException;
+import java.io.Writer;
+
 /**
 A <em>Packet</em> represents a unit of information to be sent over the Local Area Network (LAN).
  */
@@ -76,6 +79,59 @@ public String getDestination_() {
 
 public void setDestination_(String destination_) {
 	this.destination_ = destination_;
+}
+
+public void printDocument(Writer report) throws IOException {
+	String author = "Unknown";
+	String title = "Untitled";
+	int startPos = 0, endPos = 0;
+	if (getMessage_().startsWith("!PS")) {
+		startPos = getMessage_().indexOf("author:");
+		if (startPos >= 0) {
+			endPos = getMessage_().indexOf(".",
+					startPos + 7);
+			if (endPos < 0) {
+				endPos = getMessage_().length();
+			}
+			;
+			author = getMessage_().substring(startPos + 7,
+					endPos);
+		}
+		;
+		startPos = getMessage_().indexOf("title:");
+		if (startPos >= 0) {
+			endPos = getMessage_().indexOf(".",
+					startPos + 6);
+			if (endPos < 0) {
+				endPos = getMessage_().length();
+			}
+			;
+			title = getMessage_().substring(startPos + 6,
+					endPos);
+		}
+		;
+		report.write("\tAccounting -- author = '");
+		report.write(author);
+		report.write("' -- title = '");
+		report.write(title);
+		report.write("'\n");
+		report.write(">>> Postscript job delivered.\n\n");
+		report.flush();
+	} else {
+		title = "ASCII DOCUMENT";
+		if (getMessage_().length() >= 16) {
+			author = getMessage_().substring(8, 16);
+		}
+		;
+		report.write("\tAccounting -- author = '");
+		report.write(author);
+		report.write("' -- title = '");
+		report.write(title);
+		report.write("'\n");
+		report.write(">>> ASCII Print job delivered.\n\n");
+		report.flush();
+	}
+	;
 }
 
 
