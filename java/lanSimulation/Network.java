@@ -220,7 +220,7 @@ public class Network {
 		Packet packet = new Packet("BROADCAST", firstNode_.getName_(),
 				firstNode_.getName_());
 		do {
-			currentNode.reportBroadcast(report);
+			currentNode.reportBroadcast(report,true);
 			currentNode = currentNode.getNextNode_();
 		} while (!packet.getDestination_().equals(currentNode.getName_()));
 
@@ -281,27 +281,14 @@ public class Network {
 
 		if (startNode != null) {
 
-			try {
-				report.write("\tNode '");
-				report.write(startNode.getName_());
-				report.write("' passes packet on.\n");
-				report.flush();
-			} catch (IOException exc) {
-				// just ignore
-			}
-			;
+				startNode.reportBroadcast(report,false);
+
 			currentNode = startNode.getNextNode_();
 			while ((!packet.getDestination_().equals(currentNode.getName_()))
 					& (!packet.getOrigin_().equals(currentNode.getName_()))) {
-				try {
-					report.write("\tNode '");
-					report.write(currentNode.getName_());
-					report.write("' passes packet on.\n");
-					report.flush();
-				} catch (IOException exc) {
-					// just ignore
-				}
-				;
+				
+					currentNode.reportBroadcast(report,false);
+
 				currentNode = currentNode.getNextNode_();
 			}
 			;

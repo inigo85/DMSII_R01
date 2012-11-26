@@ -195,19 +195,22 @@ public void print(StringBuffer buf) {
 	buf.append(" -> ");
 }
 
-public void reportBroadcast(Writer report) {
+public void reportBroadcast(Writer report, boolean fullLog) {
 	try {
 	report.write("\tNode '");
 	report.write(getName_());
-	report.write("' accepts broadcase packet.\n");
-	report.write("\tNode '");
-	report.write(getName_());
+	if(fullLog){
+		report.write("' accepts broadcase packet.\n");
+		report.write("\tNode '");
+		report.write(getName_());
+	}
 	report.write("' passes packet on.\n");
 	report.flush();
 	} catch (IOException exc) {
 	// just ignore
 	};
 }
+
 
             
 }
